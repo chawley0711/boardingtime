@@ -36,6 +36,19 @@ app.get('/register', function(req, res){
     "title": "Register"
   });
 });
+app.post('/registerComplete', urlencodedParser, function(req, res){
+  var user = {
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    age: req.body.age
+  }
+  res.render('registerComplete',
+  {
+    "title": "Register Complete",
+    user: user
+  });
+});
 app.get('/login', function(req, res){
   res.render('login',
   {
