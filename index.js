@@ -27,15 +27,29 @@ app.use(expressSession({
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 app.get('/', function(req, res){
-  res.render('login');
-});
-
-app.get('/public', function(req, res){
   res.render('public');
 });
 
+app.get('/register', function(req, res){
+  res.render('register',
+  {
+    "title": "Register"
+  });
+});
+app.get('/login', function(req, res){
+  res.render('login',
+  {
+    "title": "Login"
+  });
+});
 app.get('/private', checkAuth, function(req, res){
   res.render('private');
+});
+app.get('/profile', checkAuth, function(req, res){
+  res.render('profile',
+  {
+    "title": "Profile"
+  });
 });
 
 app.get('/logout', function(req, res){

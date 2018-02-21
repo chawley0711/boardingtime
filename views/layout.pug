@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title #{title}
+    link(href='style.css' rel='stylesheet')
+    nav
+      div(class='navbutton')
+        a(href='/')
+          label Home
+      div(id='LoginStuff')
+        div(id='postLoginStuff')
+          div(class='navbutton')
+            a(href='profile')
+              label Profile
+          div(class='navbutton')
+            a(href='logout')
+              label Logout
+        div(id='preLoginStuff')
+          div(class='navbutton')
+            a(href='login')
+              label Login
+          div(class='navbutton')
+            a(href='register')
+              label Register
+  body
+    h1 #{title}
+    div
+      block content
