@@ -12,10 +12,7 @@ var userSchema = mongoose.Schema({
     password: String,
     email: String,
     age: String,
-    eyes: String,
-    nose: String,
-    mouth: String,
-    color: String
+    avatarString: String
 });
 
 
@@ -45,10 +42,7 @@ exports.createUser = function (req, res) {
         password: req.body.password,
         email: req.body.email,
         age: req.body.age,
-        eyes: req.body.eyes,
-        nose: req.body.nose,
-        mouth: req.body.mouth,
-        color: req.body.color
+        avatarString: req.cookie.avatarString
     });
     user.save(function (err, person) {
         if (err) return console.error(err);
@@ -74,10 +68,7 @@ exports.editUser = function (req, res) {
         user.password = req.body.password;
         user.age = req.body.age;
         user.email = req.body.email;
-        user.eyes = req.body.eyes;
-        user.nose = req.body.nose;
-        user.mouth = req.body.mouth;
-        user.color = req.body.color;
+        user.avatarString = req.cookie.avatarString;
 
         user.save(function (err, person) {
             if (err) return console.error(err);

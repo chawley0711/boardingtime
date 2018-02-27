@@ -6,6 +6,7 @@ var express = require('express'),
   route = require('./Routes/routes.js');
 
 var app = express();
+app.use(cookieparser('secret'));
 
 var checkAuth = function(req, res, next) {
   if(req.session.user && req.session.user.isAuthenticated){
