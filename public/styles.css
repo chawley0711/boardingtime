@@ -1,11 +1,16 @@
 html{
-    background-color: #900C3F;
+    background-color: #F2F3F4;
     padding: 25px;
+    font-family: Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.4px;
 }
 
 .pageContainer{
     text-align: center;
-    background-color: #C70039;
+    background-color: #154360;
     border-radius: 15px;
     border: solid 2px black;
 }
@@ -15,7 +20,7 @@ html{
 }
 
 .loginSpace{
-    background-color: #FF5733;
+    background-color: #5499C7;
     padding: 35px;
     display: inline-block;
     border-radius: 15px;
@@ -24,17 +29,28 @@ html{
 
 }
 
+
+.register{
+    background-color: #5499C7;
+    padding: 35px;
+    display: inline-block;
+    border-radius: 15px;
+    border: solid 2px black;
+    margin-bottom: 25px;
+    width: 35%;
+}
+
 .loginSpaceContainer h3{
     text-align: center;
 }
 
 .navbar{
-    background-color: #FF5733;
+    background-color: #5499C7;
     padding: 20px;
     border-radius: 15px;
     border: solid 2px black;
     display: inline-block;
-    width: 29%;
+    width: 32%;
 }
 
 .navbutton{
