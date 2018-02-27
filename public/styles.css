@@ -1,0 +1,59 @@
+html{
+    background-color: #900C3F;
+    padding: 25px;
+}
+
+.pageContainer{
+    text-align: center;
+    background-color: #C70039;
+    border-radius: 15px;
+    border: solid 2px black;
+}
+.loginSpaceContainer{
+    width: 12.7%;
+    margin: auto;
+}
+
+.loginSpace{
+    background-color: #FF5733;
+    padding: 35px;
+    display: inline-block;
+    border-radius: 15px;
+    border: solid 2px black;
+    margin-bottom: 25px;
+
+}
+
+.loginSpaceContainer h3{
+    text-align: center;
+}
+
+.navbar{
+    background-color: #FF5733;
+    padding: 20px;
+    border-radius: 15px;
+    border: solid 2px black;
+    display: inline-block;
+    width: 29%;
+}
+
+.navbutton{
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px;
+    display: inline-block;
+    float: left;
+    font-size: 20px;
+}
+
+a:visited{
+    color: black;
+}
+
+
+h1{
+    display: inline-block;
+    margin: 35px;
+    background-color: transparent;
+
+}
