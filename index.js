@@ -2,7 +2,8 @@ var express = require('express'),
   pug = require('pug'),
   bodyParser = require('body-parser'),
   expressSession = require('express-session'),
-  path = require('path');
+  path = require('path'),
+  route = require('./routes/routes.js');
 
 var app = express();
 

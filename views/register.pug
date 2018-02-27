@@ -3,9 +3,22 @@ extends layout
 block content
   div(id='formPanel')
     form(id='form', method='post', action='/registerComplete')
-      div(id='userInfoArea')
+      div(id='userInfoArea' class='register')
+        h3 Username:
         input(type='text' class='textbox' name="username" id=txtUserName placeholder="Username")
+        br
+
+        h3 Password:
         input(type='text' class='password' name="password" id=txtPassword placeholder="Password")
+        br
+
+        h3 Email:
         input(type='text' class='textbox' name="email" id=txtEmail placeholder="Email Address")
+        br
+
+        h3 Age:
         input(type='text' class='textbox' name="age" id=txtAge placeholder="Age")
+        br
+
+        br
         input(type='submit' id='btnSubmit' text='Submit')
