@@ -1,16 +1,11 @@
 html{
-    background-color: #D7DBDD;
+    background-color: #900C3F;
     padding: 25px;
-    font-family: monaco, Consolas, "Lucida Console", monospace;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500;
-    line-height: 26.4px;
 }
 
 .pageContainer{
     text-align: center;
-    background-color: #2471A3;
+    background-color: #C70039;
     border-radius: 15px;
     border: solid 2px black;
 }
@@ -20,7 +15,7 @@ html{
 }
 
 .loginSpace{
-    background-color: #5499C7;
+    background-color: #FF5733;
     padding: 35px;
     display: inline-block;
     border-radius: 15px;
@@ -34,16 +29,17 @@ html{
 }
 
 .navbar{
-    background-color: #5499C7;
+    background-color: #FF5733;
     padding: 20px;
     border-radius: 15px;
     border: solid 2px black;
     display: inline-block;
-    width: 32%;
+    width: 29%;
 }
 
 .navbutton{
     padding: 15px;
+    border-radius: 5px;
     margin: 10px;
     display: inline-block;
     float: left;
@@ -60,14 +56,4 @@ h1{
     margin: 35px;
     background-color: transparent;
 
-}
-
-.register{
-    background-color: #5499C7;
-    padding: 35px;
-    display: inline-block;
-    border-radius: 15px;
-    border: solid 2px black;
-    margin-bottom: 25px;
-    width: 30%
 }
