@@ -3,12 +3,26 @@ extends layout
 block content
   div(id='formPanel')
     form(id='form', method='post', action='/registerComplete')
-      div(id='userInfoArea')
+      div(id='userInfoArea' class = 'register')
+        h3 Username:
         input(type='text' class='textbox' name="username" id=txtUsername placeholder="Username")
+        br
+
+        h3 Password:
         input(type='text' class='password' name="password" id=txtPassword placeholder="Password")
+        br
+
+        h3 Email:
         input(type='text' class='textbox' name="email" id=txtEmail placeholder="Email Address")
+        br
+
+        h3 Age:
         input(type='text' class='textbox' name="age" id=txtAge placeholder="Age")
-        div(id='avatarEditor')
+        br
+        br
+        div(id='avatarEditor' class='avatarEditor')
+
+          h3 Select Eyes:
           select(id='selEyes')
             option(value='1')
               p Eyes 1
@@ -28,6 +42,8 @@ block content
               p Eyes 8
             option(value='10')
               p Eyes 9
+          br
+          h3 Select Nose:
           select(id='selNose')
             option(value='2')
               p Nose 1
@@ -45,6 +61,8 @@ block content
               p Nose 7
             option(value='9')
               p Nose 8
+          br
+          h3 Select Mouth:
           select(id='selMouth')
             option(value='1')
               p Mouth 1
@@ -62,7 +80,12 @@ block content
               p Mouth 7
             option(value='11')
               p Mouth 8
+          br
+
+          h3 Select Color:
           input(type='color' name='color' id='selColor')
-          img(id='imgAvatar' src='https://api.adorable.io/avatars/face/eyes0/nose0/mouth0/fff')
+          br
+          br
+          img(id='imgAvatar' style='border-radius: 20px' src='https://api.adorable.io/avatars/face/eyes0/nose0/mouth0/fff')
         input(type='submit' id='btnSubmit' text='Submit')
   script(src='/scripts/avatarStuff.js')

@@ -29,6 +29,17 @@ html{
 
 }
 
+
+.register{
+    background-color: #5499C7;
+    padding: 35px;
+    display: inline-block;
+    border-radius: 15px;
+    border: solid 2px black;
+    margin-bottom: 25px;
+    width: 35%;
+}
+
 .loginSpaceContainer h3{
     text-align: center;
 }
