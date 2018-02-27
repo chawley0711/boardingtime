@@ -45,9 +45,9 @@ app.post('/registerComplete', urlencodedParser, function(req, res){
   }
   res.render('registerComplete',
   {
-    "title": "Register Complete",
     user: user
   });
+  res.redirect('private');
 });
 app.get('/login', function(req, res){
   res.render('login',
