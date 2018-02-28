@@ -4,3 +4,13 @@ block content
   form(id='message', method='post', action='/board')
     input(type=text, name='message')
     input(type='submit',value='Submit')
+    input(type='submit',value='Submit')
+  div(class='messages' id='messageBoard')
+    each val in Messages
+      div(class="userPost")
+        p
+         img(class="avatars" src=val.avatar) 
+        p #{val.username} #{val.date}
+        p #{val.contents}
+      br
+
