@@ -94,4 +94,11 @@ app.post('/',urlencodedParser, function(req, res){
   
 });
 
+app.get('/board', function(req, res){
+  res.render('board',
+  {
+    "title": "Messages"
+  });
+});
+
 app.listen(3000);
