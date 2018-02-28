@@ -217,5 +217,14 @@ app.get('/board', function(req, res){
     "title": "Messages"
   });
 });
+app.post('/board',urlencodedParser,function(req,res){
+  var date = new Date();
+  var msg = {
+    user: req.session.username,
+    currentdate: date,
+    content: req.body.message
+  }
+  route.addMessage(msg);
+})
 
 app.listen(3000);

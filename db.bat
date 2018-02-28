@@ -1,1 +1,1 @@
-"C:\Program Files\MongoDB\Server\3.6\bin\mongod" --dbpath "C:\Users\Collin\Documents\Javascript-Winter\boardingtime\data"
+"C:\Program Files\MongoDB\Server\3.4\bin\mongod" --dbpath "C:\Users\Shallowfate\Documents\misc\Neumont\Neumont Work\Interactive Web Development\boardingtime\data"
