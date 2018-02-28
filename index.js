@@ -58,7 +58,7 @@ app.post('/login', urlencodedParser, function(req, res){
         isAuthenticated: true,
         username: req.body.username
       };
-      res.redirect('/');
+      res.redirect('/board');
     }
   });
 });
