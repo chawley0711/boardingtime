@@ -218,13 +218,25 @@ app.get('/board', function(req, res){
   });
 });
 app.post('/board',urlencodedParser,function(req,res){
-  var date = new Date();
+  var date = new Date().toDateString();
   var msg = {
-    user: req.session.username,
+    user: req.session.user.username,
     currentdate: date,
     content: req.body.message
   }
-  route.addMessage(msg);
-})
+  
+  console.log('saves message')
+  var post = new Messages({
+    username: msg.username,
+    date: msg.date,
+    contents: msg.content
+  });
+
+  console.log(msg);
+  post.save(function (err, post) {
+    if (err) return console.error(err);
+    console.log(msg.date + ' added');
+  });
+  });
 
 app.listen(3000);
