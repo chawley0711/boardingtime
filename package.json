@@ -9,6 +9,7 @@
   "author": "TBeatty",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",

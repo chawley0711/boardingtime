@@ -9,6 +9,9 @@ var express = require('express'),
 
 var app = express();
 app.use(cookieParser('secret'));
+var bcrypt = require('bcrypt-nodejs');
+var myHash ='';
+
 
 var checkAuth = function(req, res, next) {
   if(req.session.user && req.session.user.isAuthenticated){
@@ -48,7 +51,21 @@ app.post('/registerComplete', urlencodedParser, function(req, res){
     age: req.body.age,
     avatarString: req.cookies.avatarString
   }
-  route.createUser(user);
+  var hashedPW = bcrypt.hashSync(user.password);
+  console.log(hashedPW);
+  var person = new User({
+    username: user.username,
+    password: hashedPW,
+    email: user.email,
+    age: user.age,
+    avatarString: user.avatarString,
+    role: "user"
+  });
+  
+  person.save(function (err, person) {
+    if (err) return console.error(err);
+    console.log(person.username + ' added');
+  });
   res.redirect('/');
 });
 app.post('/login', urlencodedParser, function(req, res){
@@ -71,10 +88,25 @@ app.get('/login', function(req, res){
 app.get('/private', checkAuth, function(req, res){
   res.render('private');
 });
-app.get('/profile', checkAuth, function(req, res){
+app.get('/profile', urlencodedParser, checkAuth, function(req, res){
+  var user = new User();
+  user = User.where('username', req.session.user.username);
+  var user2 ={
+    username: user.username,
+    password: user.password,
+    email: user.email,
+    age: user.age,
+    avatarString: user.avatarString
+  }
+  console.log(user2 + "user stuff");
   res.render('profile',
   {
-    "title": "Profile"
+    "title": "Profile",
+    "username": user2.username,
+    "password": user2.password,
+    "email": user2.email,
+    "age": user2.username,
+    "avatarString": user2.avatarString
   });
 });
 
@@ -108,10 +140,26 @@ mongoose.connect('mongodb://localhost/data');
 var mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, 'connection error:'));
 mdb.once('open', function (callback) {
-    // var admin = mdb.admin();
-    // admin.addUser('admin', 'adminpassword', function(err, result){
-    //     admin.authenticate('admin', 'adminpassword')
-    // })
+  //   var admin = mdb.admin();
+  //   admin.addUser('admin', 'adminpassword', {
+  //     roles: [{
+  //       role : "userAdmin",
+  //       db : mdb
+  //     }]
+  //   },
+  //   function(err, result){
+  //     if(err){
+  //       return console.log("Could not add admin");
+  //     }
+  //     admin.authenticate('admin', 'adminpassword', function(err, result){
+  //       if(err){
+  //         return console.log("Could not authenticate admin");
+  //       }
+  //       console.log("Ok");
+  //       mdb.close();
+  //     })
+  //   }
+  // )
 });
 
 var userSchema = mongoose.Schema({
@@ -148,21 +196,8 @@ app.get('/create', function (req, res) {
     });
 });
 
-app.get('/createUser', function(user) {
-    console.log('asd');
-    var person = new User({
-        username: user.username,
-        password: user.password,
-        email: user.email,
-        age: user.age,
-        avatarString: user.avatarString,
-        role: "user"
-    });
-    console.log(person);
-    person.save(function (err, person) {
-        if (err) return console.error(err);
-        console.log(person.username + ' added');
-    });
+app.get('/createUser', function(user, req, res) {
+    
 });
 
 app.get('/edit', function (req, res) {
@@ -175,22 +210,21 @@ app.get('/edit', function (req, res) {
     });
 });
 
-app.get('/editUser', function (req, res) {
-    Person.findById(req.params.id, function (err, user) {
-        if (err) return console.error(err);
-        user.username = req.body.username;
-        user.password = req.body.password;
-        user.age = req.body.age;
-        user.email = req.body.email;
-        user.avatarString = req.cookie.avatarString;
+app.post('/editUser', function (req, res) {
+  User.findById(req.params.id, function (err, user) {
+      if (err) return console.error(err);
+      user.username = req.body.username;
+      user.password = req.body.password;
+      user.age = req.body.age;
+      user.email = req.body.email;
+      user.avatarString = req.cookie.avatarString;
 
-        User.save(function (err, person) {
-            if (err) return console.error(err);
-            console.log(req.body.name + ' updated');
-        });
-    });
-    res.redirect('/');
-
+      User.save(function (err, person) {
+          if (err) return console.error(err);
+          console.log(req.body.name + ' updated');
+      });
+  });
+  res.redirect('/profile');
 });
 
 app.get('/delete', function (req, res) {
