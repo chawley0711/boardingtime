@@ -1,0 +1,6 @@
+extends layout
+block content
+  img(id='imgAvatar' src='')
+  form(id='message', method='post', action='/board')
+    input(type=text, name='message')
+    input(type='submit',value='Submit')
