@@ -1,12 +1,14 @@
+
 var express = require('express'),
   pug = require('pug'),
   bodyParser = require('body-parser'),
   expressSession = require('express-session'),
   path = require('path'),
+  cookieParser = require('cookie-parser');
   route = require('./Routes/routes.js');
 
 var app = express();
-app.use(cookieparser('secret'));
+app.use(cookieParser('secret'));
 
 var checkAuth = function(req, res, next) {
   if(req.session.user && req.session.user.isAuthenticated){
@@ -43,13 +45,14 @@ app.post('/registerComplete', urlencodedParser, function(req, res){
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
-    age: req.body.age
+    age: req.body.age,
+    avatarString: req.cookies.avatarString
   }
+  route.createUser(user);
   res.render('registerComplete',
   {
     user: user
   });
-  res.redirect('private');
 });
 app.get('/login', function(req, res){
   res.render('login',

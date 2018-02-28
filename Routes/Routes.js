@@ -6,18 +6,22 @@ var mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, 'connection error:'));
 mdb.once('open', function (callback) {
 });
-
 var userSchema = mongoose.Schema({
     username: String,
     password: String,
     email: String,
     age: String,
-    avatarString: String
+    avatarString: String,
+    role: String
+});
+var messageSchema = mongoose.Schema({
+    username: String,
+    date: String,
+    contents: String
 });
 
-
 var User = mongoose.model('User_Collection', userSchema);
-
+var Messages = mongoose.model('Message_Collection', messageSchema);
 
 
 exports.index = function (req, res) {
@@ -36,19 +40,21 @@ exports.create = function (req, res) {
     });
 };
 
-exports.createUser = function (req, res) {
-    var user = new User({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        age: req.body.age,
-        avatarString: req.cookie.avatarString
+exports.createUser = function(user) {
+    console.log('asd');
+    var person = new User({
+        username: user.username,
+        password: user.password,
+        email: user.email,
+        age: user.age,
+        avatarString: user.avatarString,
+        role: "user"
     });
-    user.save(function (err, person) {
+    console.log(person);
+    person.save(function (err, person) {
         if (err) return console.error(err);
-        console.log(req.body.name + ' added');
+        console.log(person.username + ' added');
     });
-    res.redirect('/');
 };
 
 exports.edit = function (req, res) {
@@ -70,7 +76,7 @@ exports.editUser = function (req, res) {
         user.email = req.body.email;
         user.avatarString = req.cookie.avatarString;
 
-        user.save(function (err, person) {
+        User.save(function (err, person) {
             if (err) return console.error(err);
             console.log(req.body.name + ' updated');
         });
