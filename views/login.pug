@@ -1,11 +1,12 @@
 extends layout
+
 block content
   head
-    title Authentication
+    title Login
   body
     div(class="loginSpaceContainer")
       div(class="loginSpace")
-        form(id='form', method='post', action='/')
+        form(id='form', method='post', action='/login')
           label Username:
           br
           input(type='text', name='username')
@@ -14,4 +15,4 @@ block content
           br
           input(type='password', name='pass')
           br
-          input(type='submit', value='submit')
+          input(type='submit', value='Submit')
