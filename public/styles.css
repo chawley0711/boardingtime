@@ -29,7 +29,6 @@ html{
 
 }
 
-
 .register{
     background-color: #5499C7;
     padding: 35px;
@@ -66,10 +65,61 @@ a:visited{
     color: black;
 }
 
-
 h1{
     display: inline-block;
     margin: 35px;
     background-color: transparent;
+}
 
+.boardContainer{
+    background-color: #F2F3F4;
+    margin: auto;
+    width: 45%;
+    height: 750px;
+    border-radius: 15px;
+    border: 2px black solid;
+    padding: 15px;
+    margin-bottom: 35px;
+}
+
+.board{
+    background-color: #5499C7;
+    margin: auto;
+    width: 85%;
+    height: 500px;
+    border: 2px black solid;
+    border-radius: 15px;
+    padding: 15px;
+    overflow: auto;
+}
+
+.messageBox{
+    background-color: #F2F3F4;
+    /*width: 85%;*/
+    /*height: 75px;*/
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: auto;
+    padding: 5px;
+}
+
+.username{
+    float: left;
+}
+.message{
+    display: inline-block;
+    float: left;
+}
+
+.avatarBoard {
+    display: inline-block;
+    margin-top: 5px;
+    float: left;
+    margin-right: 20px;
+}
+
+.avatarBoard img{
+    width: 50px;
+    height:50px;
 }

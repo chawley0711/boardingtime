@@ -3,7 +3,7 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   expressSession = require('express-session'),
   path = require('path'),
-  route = require('./Routes/routes.js');
+  route = require('./routes/routes.js');
 
 var app = express();
 
@@ -18,14 +18,13 @@ var checkAuth = function(req, res, next) {
 app.set('view engine', 'pug');
 app.set('views', __dirname+'/views');
 app.use(express.static(path.join(__dirname+'/public')));
-
 app.use(expressSession({
   secret: 'Whatever54321',
   saveUninitialized: true,
   resave: true
 }));
 
-var urlencodedParser = bodyParser.urlencoded({extended: false});
+var urlencodedParser = bodyParser.urlencoded({extended: true});
 
 app.get('/', function(req, res){
   res.render('public');
@@ -37,25 +36,24 @@ app.get('/register', function(req, res){
     "title": "Register"
   });
 });
-app.post('/registerComplete', urlencodedParser, function(req, res){
-  var user = {
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-    age: req.body.age
-  }
-  res.render('registerComplete',
-  {
-    "title": "Register Complete",
-    user: user
-  });
-});
+
+
+app.post('/registerComplete', urlencodedParser, route.createUser);
+
+
 app.get('/login', function(req, res){
   res.render('login',
   {
     "title": "Login"
   });
 });
+
+
+
+
+
+
+
 app.get('/private', checkAuth, function(req, res){
   res.render('private');
 });
@@ -87,7 +85,6 @@ app.post('/',urlencodedParser, function(req, res){
   }else{
     res.redirect('/');
   }
-  
 });
 
 app.listen(3000);

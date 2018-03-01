@@ -11,17 +11,10 @@ var userSchema = mongoose.Schema({
     username: String,
     password: String,
     email: String,
-    age: String,
-    eyes: String,
-    nose: String,
-    mouth: String,
-    color: String
+    age: String
 });
 
-
 var User = mongoose.model('User_Collection', userSchema);
-
-
 
 exports.index = function (req, res) {
     User.find(function (err, user) {
@@ -39,23 +32,24 @@ exports.create = function (req, res) {
     });
 };
 
+
 exports.createUser = function (req, res) {
+    console.log('Creating User');
     var user = new User({
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        age: req.body.age,
-        eyes: req.body.eyes,
-        nose: req.body.nose,
-        mouth: req.body.mouth,
-        color: req.body.color
+        age: req.body.age
     });
-    user.save(function (err, person) {
-        if (err) return console.error(err);
+    user.save(function (err, user) {
+        if (err) {
+            return console.error(err);
+        }
         console.log(req.body.name + ' added');
     });
     res.redirect('/');
 };
+
 
 exports.edit = function (req, res) {
     User.findByUsername(req.params.id, function (err, user) {
