@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  div(class='messages' id='postsBoard')
+  table
+    tr
+      th Avatar
+      th Username
+      th Date
+      th Contents
+    each val in Messages
+      tr
+        td 
+          img(class="avatars" src=val.avatar)
+        td
+          label #{val.username}
+        td
+          label #{val.date}
+        td
+          label #{val.contents}
+        td
+          a(href='/delete/'+val._id)
+            label Delete

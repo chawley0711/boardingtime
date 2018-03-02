@@ -26,7 +26,11 @@ html
                   div(class='navbutton')
                     a(href='register')
                       label Register
+              div(id='btnAdmin' class='navbutton')
+                a(href='admin')
+                  label Admin
 
         h1 #{title}
         div
           block content
+        //script(src='/scripts/toggleLogin.js')

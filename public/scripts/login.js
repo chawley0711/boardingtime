@@ -1,0 +1,1 @@
+document.cookie = 'isAuthenticated=true';

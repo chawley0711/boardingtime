@@ -11,7 +11,13 @@ app.use(cookieParser('secret'));
 var bcrypt = require('bcrypt-nodejs');
 var myHash ='';
 
-
+var checkAdmin = function (req, res, next) {
+  if (req.session.user && req.session.user.role=='admin') {
+    next();
+  } else {
+    res.redirect('/');
+  }
+};
 var checkAuth = function (req, res, next) {
   if (req.session.user && req.session.user.isAuthenticated) {
     next();
@@ -54,9 +60,14 @@ app.get('/', function (req, res) {
   // });
 
   //LEAVE THIS
+  
   res.render('public');
 });
-
+app.get('/admin', function (req, res) {
+  User.find({}, function(err, users) {
+    res.render('admin', {users: users});
+ });
+});
 app.get('/register', function (req, res) {
   res.render('register', {
     "title": "Register"
@@ -97,6 +108,7 @@ app.post('/login', urlencodedParser, function (req, res) {
         username: req.body.username,
         avatar: document[0].avatarString
       };
+      req.cookies.isAuthenticated = 'true';
       res.redirect('/board');
     }
   });
@@ -206,15 +218,6 @@ var User = mongoose.model('User_Collection', userSchema);
 var Messages = mongoose.model('Message_Collection', messageSchema);
 
 
-app.get('/peopleList', function (req, res) {
-  User.find(function (err, user) {
-    if (err) return console.error(err);
-    res.render('index', {
-      title: 'People List',
-      user: user
-    });
-  });
-});
 
 app.get('/create', function (req, res) {
   res.render('create', {
@@ -276,19 +279,21 @@ app.get('/editUser', function (req, res) {
   res.redirect('/profile');
 });
 
-app.get('/delete', function (req, res) {
+app.get('/delete/:id', function (req, res) {
   User.findByIdAndRemove(req.params.id, function (err, user) {
     if (err) return console.error(err);
-    res.redirect('/');
+    res.redirect('/admin');
   });
 });
 
-app.get('/details', function (req, res) {
+app.get('/posts/:id', function (req, res) {
   User.findById(req.params.id, function (err, user) {
     if (err) return console.error(err);
-    res.render('details', {
-      title: user.username + "'s Details",
-      user: user
+    console.log(user.username);
+    Messages.find({username: user.username}, function(err, document){
+      res.render('posts', {
+        "Messages": document
+      });
     });
   });
 });
@@ -303,21 +308,6 @@ app.get('/board', function (req, res) {
   });
 
 
-});
-app.post('/board',urlencodedParser,function(req,res){
-  var date = new Date().toDateString();
-  var msg = {
-    user: req.session.user.username,
-    currentdate: date,
-    content: req.body.message
-  }
-  
-  console.log('saves message')
-  var post = new Messages({
-    username: msg.username,
-    date: msg.date,
-    contents: msg.content
-  });
 });
 app.post('/board', urlencodedParser, function (req, res) {
   var date = new Date().toDateString();
