@@ -35,6 +35,25 @@ var urlencodedParser = bodyParser.urlencoded({
 });
 
 app.get('/', function (req, res) {
+  //UNCOMMENT THIS CODE TO ADD AN ADMIN TO YOUR DATABASE ONCE.
+  //ONCE YOU ADD IT, CHECK THE USER TABLE TO MAKE SURE IT'S THERE.
+  //AFTER YOU DO THAT, COMMENT THIS CODE OUT AGAIN BEFORE YOU CHANGE PAGES
+  //OTHERWISE YOU WILL END UP WITH MULTIPLE ADMINS
+  // var hashedPW = bcrypt.hashSync('password');
+  // var user = new User({
+  //   username: 'admin',
+  //   password: hashedPW,
+  //   email: 'admin@admin.com',
+  //   age: '8',
+  //   avatarString: 'https://api.adorable.io/avatars/face/eyes4/nose8/mouth3/4B69AA',
+  //   role: 'admin'
+  // });
+  // user.save(function (err, user) {
+  //   if (err) return console.error(err);
+  //   console.log(user.username + ' added');
+  // });
+
+  //LEAVE THIS
   res.render('public');
 });
 
@@ -50,7 +69,7 @@ app.post('/registerComplete', urlencodedParser, function (req, res) {
     email: req.body.email,
     age: req.body.age,
     avatarString: req.cookies.avatarString
-  }
+  });
   var hashedPW = bcrypt.hashSync(user.password);
   console.log(hashedPW);
   var person = new User({
@@ -61,32 +80,23 @@ app.post('/registerComplete', urlencodedParser, function (req, res) {
     avatarString: user.avatarString,
     role: "user"
   });
-  
+
   person.save(function (err, person) {
     if (err) return console.error(err);
     console.log(person.username + ' added');
   });
-    avatarString: req.cookies.avatarString,
-    role: "User"
-  });
-  user.save(function (err, user) {
-    if (err) return console.error(err);
-    console.log(user.username + ' added');
-  });
-  console.log(user);
   res.redirect('/');
 });
 app.post('/login', urlencodedParser, function (req, res) {
   User.find({
     username: req.body.username
   }, function (err, document) {
-    if (document.password == req.body.password) {
+    if(bcrypt.compareSync(req.body.pass, document[0].password)){
       req.session.user = {
         isAuthenticated: true,
         username: req.body.username,
         avatar: document[0].avatarString
       };
-      console.log(document);
       res.redirect('/board');
     }
   });
@@ -118,9 +128,6 @@ app.get('/profile', urlencodedParser, checkAuth, function(req, res){
     "email": user2.email,
     "age": user2.username,
     "avatarString": user2.avatarString
-app.get('/profile', checkAuth, function (req, res) {
-  res.render('profile', {
-    "title": "Profile"
   });
 });
 
@@ -215,9 +222,6 @@ app.get('/create', function (req, res) {
   });
 });
 
-app.get('/createUser', function(user, req, res) {
-    
-
 app.get('/createUser', function (user) {
   console.log('asd');
   var person = new User({
@@ -253,6 +257,8 @@ app.post('/editUser', function (req, res) {
       user.age = req.body.age;
       user.email = req.body.email;
       user.avatarString = req.cookie.avatarString;
+  });
+});
 app.get('/editUser', function (req, res) {
   Person.findById(req.params.id, function (err, user) {
     if (err) return console.error(err);
@@ -266,13 +272,6 @@ app.get('/editUser', function (req, res) {
       if (err) return console.error(err);
       console.log(req.body.name + ' updated');
     });
-  });
-  res.redirect('/');
-
-      User.save(function (err, person) {
-          if (err) return console.error(err);
-          console.log(req.body.name + ' updated');
-      });
   });
   res.redirect('/profile');
 });
@@ -305,7 +304,21 @@ app.get('/board', function (req, res) {
 
 
 });
-
+app.post('/board',urlencodedParser,function(req,res){
+  var date = new Date().toDateString();
+  var msg = {
+    user: req.session.user.username,
+    currentdate: date,
+    content: req.body.message
+  }
+  
+  console.log('saves message')
+  var post = new Messages({
+    username: msg.username,
+    date: msg.date,
+    contents: msg.content
+  });
+});
 app.post('/board', urlencodedParser, function (req, res) {
   var date = new Date().toDateString();
   var msg = {
