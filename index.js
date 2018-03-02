@@ -61,7 +61,6 @@ app.post('/registerComplete', urlencodedParser, function (req, res) {
     avatarString: user.avatarString,
     role: "user"
   });
-  
   person.save(function (err, person) {
     if (err) return console.error(err);
     console.log(person.username + ' added');
@@ -305,6 +304,20 @@ app.get('/board', function (req, res) {
 
 
 });
+app.post('/board',urlencodedParser,function(req,res){
+  var date = new Date().toDateString();
+  var msg = {
+    user: req.session.user.username,
+    currentdate: date,
+    content: req.body.message
+  }
+  
+  console.log('saves message')
+  var post = new Messages({
+    username: msg.username,
+    date: msg.date,
+    contents: msg.content
+  });
 
 app.post('/board', urlencodedParser, function (req, res) {
   var date = new Date().toDateString();
