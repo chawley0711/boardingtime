@@ -27,6 +27,9 @@ html{
     background-color: #154360;
     border-radius: 15px;
     border: solid 2px black;
+    width: 100%;
+    height: 100%;
+    margin: 15px;
 }
 .loginSpaceContainer{
     width: 12.7%;
@@ -136,4 +139,42 @@ h1{
 .avatarBoard img{
     width: 50px;
     height:50px;
+}
+
+.profileContainer{
+    background-color: #5499C7;
+    padding: 10px;
+    width: 48%;
+    border-radius: 15px;
+    float: left;
+    margin-top: 15px;
+    border: 2px solid black;
+}
+
+.profileImageContainer{
+    padding: 5px;
+    width: fit-content;
+    background-color: #5499C7;
+    margin: auto;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    border: 2px solid black;
+}
+
+.profileImageContainer img{
+    width: 75%;
+    height: 75%;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+}
+
+.avatarEditor{
+    background-color: #5499C7;
+    padding: 10px;
+    width: 48%;
+    border-radius: 15px;
+    border: 2px solid black;
+    float: right;
+    margin-top: 15px;
 }
